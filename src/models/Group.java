@@ -43,6 +43,7 @@ public class Group {
 
     @Override
     public String toString() {
+        sortByName();
         return "Group{groupName='" + groupName + "', students=" + Arrays.toString(students) + '}';
     }
 
@@ -73,5 +74,26 @@ public class Group {
             }
         }
         return false;
+    }
+
+    public void sortByName() {
+        int n = students.length;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (students[j] == null) {
+                    Student temp = students[j];
+                    students[j] = students[j + 1];
+                    students[j + 1] = temp;
+                }
+                if (students[j] == null || students[j + 1] == null) {
+                    continue;
+                }
+                if (students[j].getLastName().compareTo(students[j + 1].getLastName()) > 0) {
+                    Student temp = students[j];
+                    students[j] = students[j + 1];
+                    students[j + 1] = temp;
+                }
+            }
+        }
     }
 }

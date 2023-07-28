@@ -9,10 +9,22 @@ import models.Student;
 public class Main {
     public static void main(String[] args) {
         Group group = new Group("IT");
+        String[] lastNames = {
+            "Aadas",
+            "Badas",
+            "Cadas",
+            "Ladas",
+            "Gadas",
+            "Madas",
+            "Sadas",
+            "Padas",
+            "Nadas",
+            "Tadas"
+        };
         for (int i = 0; i < 10; i++) {
             int id = i + 1;
             Gender gender = i % 2 == 0 ? Gender.MALE: Gender.FEMALE;
-            Student s = new Student("Jon_" + id, "Dou_" + id, gender, id, group.getGroupName());
+            Student s = new Student("Jon_" + id, lastNames[9 - i], gender, id, group.getGroupName());
             try {
                 group.addStudent(s);
             } catch (GroupOverflowException e) {
@@ -22,7 +34,7 @@ public class Main {
 
         System.out.println(group);
 
-        String stLastName = "Dou_4";
+        String stLastName = "Nadas";
         try {
             System.out.println(group.searchStudentByLastName(stLastName));
         } catch (StudentNotFoundException e) {
@@ -30,7 +42,9 @@ public class Main {
         }
 
         System.out.println(group.removeStudentByID(2));
-        System.out.println(group.removeStudentByID(2));
+        System.out.println(group.removeStudentByID(5));
+        System.out.println(group.removeStudentByID(6));
+        System.out.println(group.removeStudentByID(7));
         System.out.println(group);
 
         try {
