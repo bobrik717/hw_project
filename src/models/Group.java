@@ -2,8 +2,10 @@ package models;
 
 import Exceptions.GroupOverflowException;
 import Exceptions.StudentNotFoundException;
+import comparators.StudentNameComparator;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class Group {
     private String groupName;
@@ -43,7 +45,7 @@ public class Group {
 
     @Override
     public String toString() {
-        sortByName();
+        Arrays.sort(students, Comparator.nullsLast(new StudentNameComparator()));
         return "Group{groupName='" + groupName + "', students=" + Arrays.toString(students) + '}';
     }
 
