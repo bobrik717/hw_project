@@ -3,6 +3,7 @@ package main;
 import Exceptions.GroupOverflowException;
 import Exceptions.StudentNotFoundException;
 import enums.Gender;
+import models.ConsoleReader;
 import models.Group;
 import models.Student;
 
@@ -49,6 +50,14 @@ public class Main {
 
         try {
             group.addStudent(new Student("Jon_11", "Dou_11", Gender.FEMALE, 11, group.getGroupName()));
+        } catch (GroupOverflowException e) {
+            System.out.println("Group is full");
+        }
+
+        System.out.println(group);
+
+        try {
+            group.addStudent((new ConsoleReader()).createStudent());
         } catch (GroupOverflowException e) {
             System.out.println("Group is full");
         }
