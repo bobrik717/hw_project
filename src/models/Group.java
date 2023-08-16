@@ -6,6 +6,7 @@ import comparators.StudentNameComparator;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Objects;
 
 public class Group {
     private String groupName;
@@ -49,7 +50,25 @@ public class Group {
         return "Group{groupName='" + groupName + "', students=" + Arrays.toString(students) + '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Group group = (Group) o;
+        return Objects.equals(groupName, group.groupName) && Arrays.equals(students, group.students);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(groupName);
+        result = 31 * result + Arrays.hashCode(students);
+        return result;
+    }
+
     public void addStudent(Student student) throws GroupOverflowException {
+        if(!checkIsNewStudent(student)) {
+            return;
+        }
         for (int i = 0; i < students.length; i++) {
             if (students[i] == null) {
                 students[i] = student;
@@ -97,5 +116,14 @@ public class Group {
                 }
             }
         }
+    }
+
+    public boolean checkIsNewStudent(Student student) {
+        for (Student st : students) {
+            if(student.equals(st)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
